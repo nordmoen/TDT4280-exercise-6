@@ -23,7 +23,6 @@ public class ControllerAgent extends Agent {
 class ObstacleAvoidanceBehaviour extends CyclicBehaviour {
 	private Agent myAgent;
 	private double maxSpeed = 100.0;
-	private double tBearing = -1;
 	private boolean recovery = false;
 	private final int points = 10;
 	private final double maxDiff = 0.01;
@@ -113,7 +112,6 @@ class ObstacleAvoidanceBehaviour extends CyclicBehaviour {
 			 */
 			if(prevPos.size() >= points/2){
 				recovery = true;
-				tBearing = (bearing + 180) % 360;
 				for(int i = prevPos.size() - 1; i > 0; i--){
 					Point one = prevPos.get(i);
 					Point two = prevPos.get(i-1);
@@ -121,7 +119,6 @@ class ObstacleAvoidanceBehaviour extends CyclicBehaviour {
 					double y = Math.abs(one.y - two.y);
 					if(x > maxDiff || y > maxDiff){
 						recovery = false;
-						tBearing = -1;
 						break;
 					}
 				}
